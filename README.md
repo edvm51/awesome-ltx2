@@ -279,6 +279,8 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 | **2.3** | `ltx-2.3-22b dev` | bf16 | 42 GB | [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy/resolve/main/diffusion_models/ltx-2.3-22b-dev_transformer_only_bf16.safetensors) |
 | **2.3** | `ltx-2.3-22b dev`  | fp8 | 23.5 GB | [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy/resolve/main/diffusion_models/ltx-2.3-22b-dev_transformer_only_fp8_scaled.safetensors) |
 | **2.3** | `ltx-2.3-22b distilled` | bf16 | 42 GB | [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy/resolve/main/diffusion_models/ltx-2.3-22b-distilled_transformer_only_bf16.safetensors) |
+| **2.3** | `ltx-2.3-22b distilled` | fp8 input scaled | 23.5 GB | [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy/resolve/main/diffusion_models/ltx-2.3-22b-distilled_transformer_only_fp8_input_scaled.safetensors) |
+| **2.3** | `ltx-2.3-22b distilled` | fp8 input scaled v2 | 23.2 GB | [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy/resolve/main/diffusion_models/ltx-2.3-22b-distilled_transformer_only_fp8_input_scaled_v2.safetensors) |
 | **2.3** | `ltx-2.3-22b distilled` | fp8 | 23.5 GB | [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy/resolve/main/diffusion_models/ltx-2.3-22b-distilled_transformer_only_fp8_scaled.safetensors) |
 | | | | | |
 | **2** | `ltx-2-19b dev` | bf16 | 37.8 GB | [Kijai](https://huggingface.co/Kijai/LTXV2_comfy/resolve/main/diffusion_models/ltx-2-19b-dev_transformer_only_bf16.safetensors) |
@@ -287,6 +289,8 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 | **2** | `ltx-2-19b distilled` | bf16 | 37.8 GB | [Kijai](https://huggingface.co/Kijai/LTXV2_comfy/resolve/main/diffusion_models/ltx-2-19b-distilled_transformer_only_bf16.safetensors?download=true) |
 | **2** | `ltx-2-19b distilled` | fp8 | 21.6 GB | [Kijai](https://huggingface.co/Kijai/LTXV2_comfy/resolve/main/diffusion_models/ltx-2-19b-distilled-fp8_transformer_only.safetensors) |
 
+> [!NOTE]  
+> input_scaled additionally have activation scaling, and are set to run with fp8 matmuls on supported hardware (roughly 40xx and later Nvidia GPUs).
 
 ### VAE (Video & Audio)
 
