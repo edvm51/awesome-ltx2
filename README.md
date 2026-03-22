@@ -462,6 +462,9 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 | [T2V Single Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_T2V_Single_Pass.json) |
 | [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_Extend_Any_Video.json) |
 | [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json) |
+| [V2V Just Talk Add Lipsynced Voice To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_Just_Talk_add_lipsynced-voice_to_any_video.json) |
+| [I2V T2V Dev Full-Steps](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Dev_Full-Steps.json) |
+| [I2V T2V Long Video Custom Audio Singlepass Loop](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio_singlepass_loop.json) |
 
 <details>
   <summary>RuneXX LTX-2 Workflows old pre_feb2026</summary>
