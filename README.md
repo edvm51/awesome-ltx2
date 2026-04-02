@@ -2,6 +2,8 @@
 
 A curated list of models, text encoders, and tools for the LTX-2 video generation suite.
 
+![ltx-logo](https://github.com/user-attachments/assets/ee73cbc3-648b-47fa-9346-c4299919a060)
+
 ## Intro
 
 * [LTX-2: A New Chapter in Generative AI](https://website.ltx.video/blog/introducing-ltx-2)
