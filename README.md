@@ -229,6 +229,61 @@ These models are optimized for lower memory usage. Note that in ComfyUI, these a
 
 </details>
 
+#### Special Quantization: PolarQuant Q5
+
+**LTX-2.3 (22B) — PolarQuant Q5** is a bit-packed quantization method using Hadamard-Rotated Lloyd-Max Quantization. It achieves optimal Gaussian weight quantization via Hadamard rotation, delivering near-lossless quality with significant size reduction.
+
+<details>
+  <summary>Specification</summary>
+
+  <img  alt="image" src="https://github.com/user-attachments/assets/2f7e3300-aadf-447e-acd8-695fb1110a77" />
+
+| Specification | Value |
+|--------------|-------|
+| Parameters | 22B |
+| Transformer Blocks | 48 |
+| Hidden Dimension | 4096 |
+| Layers Quantized | 1,347 (of 5,947 total tensors) |
+
+**Compression Statistics:**
+
+| Component | Original Size | PQ5 Packed | Reduction |
+|-----------|--------------|------------|----------|
+| Transformer (1,347 layers) | 37 GB | 4.6 GB | **-88%** |
+| VAE + Skip (4,600 layers) | 9.1 GB | 9.1 GB | BF16 kept |
+| Upscalers | 1.3 GB | 1.3 GB | BF16 kept |
+| **Total** | **46.2 GB** | **15 GB** | **-68%** |
+
+<img alt="image" src="https://github.com/user-attachments/assets/5f833dc6-91b5-4aae-b33e-59e498fa5aa3" />
+
+
+**Quality Metrics:**
+- Cosine Similarity: **0.9986** (near-lossless)
+- Download Size: **15 GB**
+- Beats torchao INT4 on perplexity (PPL)
+
+**Hardware Requirements:**
+
+| GPU | VRAM | Status |
+|-----|------|--------|
+| A100 (80 GB) | 80 GB | Full speed |
+| A100 (40 GB) | 40 GB | Recommended |
+| RTX 4090 (24 GB) | 24 GB | With offloading |
+
+**Key Features:**
+- Mixed precision approach: transformer heavily quantized (-88%) while VAE remains BF16
+- 5-bit bit-packed representation (Q5)
+- 50-65% smaller than original with zero quality loss
+- One-command setup with easy generation wrapper
+</details>
+
+| Model | Size | Download |
+| :--- | :---: | :--- |
+| `LTX-2.3-22B-PolarQuant-Q5` | 15 GB | [![](https://img.shields.io/badge/caiovicentino1-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/caiovicentino1/LTX-2.3-22B-PolarQuant-Q5) |
+
+*Installation:* `pip install safetensors huggingface_hub scipy`
+*ArXiv Reference:* [2603.29078](https://arxiv.org/abs/2603.29078)
+
 <p id="text-encoder" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
 ## Text Encoders
@@ -385,12 +440,26 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 * Lightricks LTX-2.3
   * [Union Control](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-Union-Control) - Unified IC-LoRA combining Canny + Depth + Pose control signals for multi-signal video generation conditioning
   * [Motion Track Control](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-Motion-Track-Control) - Guides object motion using sparse point trajectories via colored spline overlays on reference videos
+* vrgamedevgirl84
+  * [ClayMationStyle](https://huggingface.co/vrgamedevgirl84/LTX2.3_ClayMationStyle) - Clay animation style LoRA for LTX-2.3
+  * [Enhancer1](https://huggingface.co/vrgamedevgirl84/LTX2.3_Enhancer1) - Video enhancement LoRA
+  * [Enhancer2](https://huggingface.co/vrgamedevgirl84/LTX2.3_enhancer2) - Second video enhancement LoRA
+* oumoumad
+  * [LTX-2 IC-LoRA-Ungrade](https://huggingface.co/oumoumad/LTX-2-19b-IC-LoRA-Ungrade) - Removes color grading and contrast from footage, returning neutral ungraded appearance
+  * [LTX-2.3 IC-LoRA-Ungrade](https://huggingface.co/oumoumad/LTX-2.3-22b-IC-LoRA-Ungrade) - LTX-2.3 version of color grading removal IC-LoRA
+* Cseti
+  * [IC-LoRA-Cameraman v1](https://huggingface.co/Cseti/LTX2.3-22B_IC-LoRA-Cameraman_v1) - Transfers camera movements (zoom, pan, tilt, orbit) from reference video to generated output
+* 100percentrobot
+  * [Audio-Reactive LORA](https://huggingface.co/100percentrobot/LTX-2.3-Audio-Reactive-LORA) - Generates audio-reactive videos with motion synchronized to musical elements (beats, rhythm)
+* LiconStudio
+  * [VBVR-lora-I2V](https://huggingface.co/LiconStudio/Ltx2.3-VBVR-lora-I2V) - Enhances video generation for complex reasoning tasks including multi-object interactions, physical causality, and spatial relationships
+* siraxe
+  * [MergeGreen IC-lora](https://huggingface.co/siraxe/MergeGreen_IC-lora_ltx2.3) - Maintains motion at start/end frames, use middle frames with RGB 0,191,0 (75% green fill) in IC-LoRA workflow
 * Lightricks LTX-2
   * [Canny Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Canny-Control) - Edge detection control for structural guidance
   * [Depth Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Depth-Control) - Depth map conditioning for 3D spatial control
   * [Detailer](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Detailer) - Enhances fine details and textures in generated videos
   * [Pose Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Pose-Control) - Human pose estimation control for motion guidance
-
 
 ### Styles
 *   [LTX-2-19b-LoRA-SPROUT](https://huggingface.co/oumoumad/LTX-2-19b-LoRA-SPROUT)
@@ -459,7 +528,7 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 
 ##  Workflow & Technical Notes
 
-**Lightricks** official WF:
+### Lightricks
 
 **[LTX-2.3](https://github.com/Lightricks/ComfyUI-LTXVideo/tree/master/example_workflows/2.3)**:
 * [ICLoRA Motion Track Control](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.3/ltx-2.3-iclora-motion-track-control.json)
@@ -476,7 +545,8 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 * [Video to Video](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.0/ltx-2-v2v.json)
 * [Video to Video Detailer](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.0/ltx-2-v2v-detailer.json)
 
-**ComfyUI** official WF:
+### ComfyUI
+
 * [Text-to-video](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_t2v.json)
 * [Text-to-video Distilled (faster, 8 steps)](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_t2v_distilled.json)
 * [Image-to-video](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_t2v_distilled.json)
@@ -485,79 +555,82 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 * [Canny control](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_canny_to_video.json)
 * [Pose control](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_pose_to_video.json)
 
+### RuneXX
+
 **[RuneXX](https://huggingface.co/RuneXX/LTX-2.3-Workflows) LTX-2.3 Workflows:**
 
-**Text-to-Video (T2V):**
-| Workflow |
-| :--- |
-| [T2V Basic](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_T2V_Basic.json) |
-| [T2V Single Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_T2V_Single_Pass.json) |
 
-**Image-to-Video / Text-to-Video (I2V/T2V):**
-| Workflow |
-| :--- |
-| [I2V T2V Basic](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Basic.json) |
-| [I2V T2V Basic Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Basic_Custom_Audio.json) |
-| [I2V T2V Basic GGUF](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Basic_GGUF.json) |
-| [I2V T2V Basic ID-Lora Reference Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Basic_ID-Lora_reference_audio.json) |
-| [I2V T2V Dev Full-Steps](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Dev_Full-Steps.json) |
-| [I2V T2V Single Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Single_Pass.json) |
-| [I2V T2V Talking Avatar (Fish-Audio-Pro)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_Fish-Audio-Pro).json) |
-| [I2V T2V Talking Avatar (Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_Qwen-TTS).json) |
+* [I2V T2V Basic](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Basic.json)
+* [I2V T2V Basic GGUF](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Basic_GGUF.json)
+* [I2V T2V Dev Full-Steps](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Dev_Full-Steps.json)
+* [I2V T2V Simple Single Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Simple_single_pass.json)
+* [T2V Basic](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_T2V_Basic.json)
+* [T2V Simple Single Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_T2V_Simple_single_pass.json)
 
-**Long Video:**
-| Workflow |
-| :--- |
-| [I2V T2V Long Video Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio.json) |
-| [I2V T2V Long Video Custom Audio Loop](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio_Loop.json) |
-| [I2V T2V Long Video Custom Audio Singlepass Loop](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio_singlepass_loop.json) |
+**Talking-Avatar-TTS:**
 
-**First-Last Frame Video (FL2V):**
-| Workflow |
-| :--- |
-| [FL2V Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_FL2V_Custom_Audio.json) |
-| [FL2V First Last Frame Injection](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_FL2V_First_Last_Frame_Injection.json) |
+* [I2V T2V Talking Avatar (Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Talking-Avatar-TTS/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_Qwen-TTS).json)
+* [I2V T2V Talking Avatar (Fish-Audio-Pro)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Talking-Avatar-TTS/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_Fish-Audio-Pro).json)
 
-**First-Middle-Last Frame Video (FML2V):**
-| Workflow |
-| :--- |
-| [FML2V First Middle Last Frame Guider](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_FML2V_First_Middle_Last_Frame_Guider.json) |
-| [FML2V First Middle Last Frame Injection](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_FML2V_First_Middle_Last_Frame_Injection.json) |
-| [FML2V Guider Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_FML2V_Guider_Custom_Audio.json) |
+**Video-2-Video:**
+* [V2V Just Talk Prompt Lipsynced Voice](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_prompt_lipsynced-voice_to_any_video.json) 
+* [V2V Dub It lip-synced dubbing multilanguage](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Dub_It_lip-synced_dubbing_multilanguage.json) 
+* [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video.json) 
+* [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json) 
+* [V2V ReTake recreate any section of any video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json) 
 
-**Video-to-Video (V2V):**
-| Workflow |
-| :--- |
-| [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_Extend_Any_Video.json) |
-| [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json) |
-| [V2V Just Talk Add Lipsynced Voice To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_Just_Talk_add_lipsynced-voice_to_any_video.json) |
-| [V2V ReTake Recreate Any Section Of Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json) |
+**Custom-Audio:**
+
+* [I2V T2V Basic ID-Lora Reference Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Custom-Audio/LTX-2.3_-_I2V_T2V_Basic_ID-Lora_reference_audio.json) 
+* [I2V T2V Dev Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Custom-Audio/LTX-2.3_-_I2V_T2V_Dev_Custom_Audio.json) 
+* [I2V T2V Basic Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Custom-Audio/LTX-2.3_-_I2V_T2V_Basic_Custom_Audio.json) 
+
+**First-Last-Frame:**
+
+* [FML2V Guider Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_Guider_Custom_Audio.json)
+* [FL2V Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FL2V_Custom_Audio.json)
+* [FL2V First Last Frame Injection](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FL2V_First_Last_Frame_Injection.json)
+* [FML2V First Middle Last Frame Guider](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_First_Middle_Last_Frame_Guider.json)
+* [FML2V First Middle Last Frame Injection](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_First_Middle_Last_Frame_Injection.json)
+
+**Long-Video-Experimental:**
+
+* [I2V T2V Long Video Custom Audio Loop](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Long-Video-Experimental/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio_Loop.json)
+* [I2V T2V Long Video Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Long-Video-Experimental/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio.json)
+* [I2V T2V Long Video Custom Audio singlepass loop](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Long-Video-Experimental/LTX-2.3_-_I2V_T2V_Long_Video_Custom_Audio_singlepass_loop.json)
+
+**3-Pass-Experimental:**
+
+* [I2V T2V Experimental 3-pass 1.5x Upscaler](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/3-Pass-Experimental/LTX-2.3_-_I2V_T2V_Experimental_3-Pass.json)
+* [I2V T2V DEV Experimental 3-Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/3-Pass-Experimental/LTX-2.3_-_I2V_T2V_DEV_Experimental_3-Pass.json)
+
+**Other-examples:**
+
+* [I2V T2V Basic Custom Audio with Gemma-API](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Other-examples/LTX-2.3_-_I2V_T2V_Basic_custom_audio_with_Gemma-API_example.json)
 
 <details>
   <summary>RuneXX LTX-2 Workflows old pre_feb2026</summary>
 
-| Workflow |
-| :--- |
-| [First Last Frame (guide node)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20First%20Last%20Frame%20(guide%20node).json) |
-| [First Last Frame (in-place node)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20First%20Last%20Frame%20(in-place%20node).json) |
-| [First Middle Last Frame (guide node)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20First%20Middle%20Last%20Frame%20(guide%20node).json) |
-| [I2V Basic (GGUF)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Basic%20(GGUF).json) |
-| [I2V Basic](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Basic.json) |
-| [I2V IC-Control (pose)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20IC-Control%20(pose).json) |
-| [I2V Simple First Middle Last Frame (1-pass K-Sampler)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Simple%20First%20Middle%20Last%20Frame%20(1-pass%20K-Sampler).json) |
-| [I2V Talking Avatar (voice clone Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Talking%20Avatar%20(voice%20clone%20Qwen-TTS).json) |
-| [I2V and T2V (beta test sampler previews)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20(beta%20test%20sampler%20previews).json) |
-| [I2V and T2V Basic (Custom Audio)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20Basic%20(Custom%20Audio).json) |
-| [I2V and T2V IC-Control (All-In-One Pose Canny Depth)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20IC-Control%20(All-In-One%20Pose%20Canny%20Depth).json) |
-| [I2V and T2V Simple (1-pass K-Sampler)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20Simple%20(1-pass%20K-Sampler).json) |
-| [I2V and T2V Simple (1-pass)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20Simple%20(1-pass).json) |
-| [T2V Basic (GGUF)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Basic%20(GGUF).json) |
-| [T2V Basic (low vram)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Basic%20(low%20vram).json) |
-| [T2V Basic](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Basic.json) |
-| [T2V Talking Avatar (voice clone Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Talking%20Avatar%20(voice%20clone%20Qwen-TTS).json) |
-| [V2A Foley (add sound to any video)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2A%20Foley%20(add%20sound%20to%20any%20video).json) |
-| [V2V (extend any video)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20(extend%20any%20video).json) |
-| [V2V Head Swap Experimental (BFS lora)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20Head%20Swap%20Experimental%20(BFS%20lora).json) |
-| [V2V Just Dub It (experimental)(translate speech auto dubbing)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20Just%20Dub%20It%20(experimental)(translate%20speech%20auto%20dubbing).json) |
-| [V2V Just Dub It (with voice clone)(auto dubbing translation)(experimental)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20Just%20Dub%20It%20(with%20voice%20clone)(auto%20dubbing%20translation)(experimental).json) |
+* [First Last Frame (guide node)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20First%20Last%20Frame%20(guide%20node).json)
+* [First Last Frame (in-place node)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20First%20Last%20Frame%20(in-place%20node).json)
+* [First Middle Last Frame (guide node)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20First%20Middle%20Last%20Frame%20(guide%20node).json)
+* [I2V Basic (GGUF)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Basic%20(GGUF).json)
+* [I2V Basic](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Basic.json)
+* [I2V IC-Control (pose)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20IC-Control%20(pose).json)
+* [I2V Simple First Middle Last Frame (1-pass K-Sampler)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Simple%20First%20Middle%20Last%20Frame%20(1-pass%20K-Sampler).json)
+* [I2V Talking Avatar (voice clone Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20Talking%20Avatar%20(voice%20clone%20Qwen-TTS).json)
+* [I2V and T2V (beta test sampler previews)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20(beta%20test%20sampler%20previews).json)
+* [I2V and T2V Basic (Custom Audio)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20Basic%20(Custom%20Audio).json)
+* [I2V and T2V IC-Control (All-In-One Pose Canny Depth)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20IC-Control%20(All-In-One%20Pose%20Canny%20Depth).json)
+* [I2V and T2V Simple (1-pass K-Sampler)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20Simple%20(1-pass%20K-Sampler).json)
+* [I2V and T2V Simple (1-pass)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20I2V%20and%20T2V%20Simple%20(1-pass).json)
+* [T2V Basic (GGUF)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Basic%20(GGUF).json)
+* [T2V Basic (low vram)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Basic%20(low%20vram).json)
+* [T2V Basic](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Basic.json)
+* [T2V Talking Avatar (voice clone Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20T2V%20Talking%20Avatar%20(voice%20clone%20Qwen-TTS).json)
+* [V2A Foley (add sound to any video)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2A%20Foley%20(add%20sound%20to%20any%20video).json)
+* [V2V (extend any video)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20(extend%20any%20video).json)
+* [V2V Head Swap Experimental (BFS lora)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20Head%20Swap%20Experimental%20(BFS%20lora).json)
+* [V2V Just Dub It (experimental)(translate speech auto dubbing)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20Just%20Dub%20It%20(experimental)(translate%20speech%20auto%20dubbing).json)
+* [V2V Just Dub It (with voice clone)(auto dubbing translation)(experimental)](https://huggingface.co/RuneXX/LTX-2-Workflows/resolve/main/older_comfy_pre_feb2026/LTX-2%20-%20V2V%20Just%20Dub%20It%20(with%20voice%20clone)(auto%20dubbing%20translation)(experimental).json)
 </details>
