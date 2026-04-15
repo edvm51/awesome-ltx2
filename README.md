@@ -12,7 +12,7 @@ A curated list of models, text encoders, and tools for the LTX-2 video generatio
 
 * »» [LTX-2 in ComfyUI Chattable KB](https://notebooklm.google.com/notebook/4f07f98c-75b6-4278-bde1-906f9899b60c)
 
-## Apps & Tools
+## ▓ Apps & Tools
 
 ### LTX2.3-Multifunctional
 
@@ -29,11 +29,11 @@ A curated list of models, text encoders, and tools for the LTX-2 video generatio
 - [HuggingFace](https://huggingface.co/dx8152/LTX2.3-Multifunctional) | [GitHub](https://github.com/hero8152/LTX2.3-Multifunctional) | [ComfyUI Node](https://github.com/supart/ComfyUI_TY_LTX_Desktop_Bridge) | [Tutorial](https://youtu.be/rM_wUogtrOU)
 
 
-## Models
+## ▓ Models
 
 LTX-2 models are available in various formats including full weights, transformers-only, and GGUF quantizations for efficient inference.
 
-### Checkpoints
+### ▣ Checkpoints
 
 * **[Lightricks/LTX-2](https://huggingface.co/Lightricks/LTX-2)** - Official repository.
 * **[Lightricks/LTX-2.3](https://huggingface.co/Lightricks/LTX-2.3)** - Official repository (latest version).
@@ -105,7 +105,7 @@ Required for current two-stage pipeline implementations in this repository. Down
 
 <p id="gguf" align="center">══════════════════════════════════</p>
 
-### GGUF Quantized Models
+### ▣ GGUF Quantized Models
 These models are optimized for lower memory usage. Note that in ComfyUI, these are typically loaded as transformer-only models.
 
 <details>
@@ -288,11 +288,11 @@ These models are optimized for lower memory usage. Note that in ComfyUI, these a
 
 <p id="text-encoder" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
-## Text Encoders
+## ▓ Text Encoders
 
 LTX-2 requires Gemma-3-12b variants. LTX-2.3 uses text projection layers.
 
-### **Comfy-Org Optimized Encoders**
+### ▣ **Comfy-Org Optimized Encoders**
 
 Official and optimized versions for ComfyUI.
 
@@ -309,7 +309,7 @@ Official and optimized versions for ComfyUI.
 * `gemma_3_12B_it_fpmixed`: Experimental quant. Should be better than the fp8 scaled
 * `gemma_3_12B_it_fp4_mixed`: 90% fp4 layers
 
-### **Gemma-3-12b Abliterated**
+### ▣ **Gemma-3-12b Abliterated**
 
 #### Why Choose Abliterated Encoders?
 Standard Gemma models often incorporate safety alignment that "sanitizes" or weakens specific concepts within prompt embeddings. Even when the model doesn't explicitly refuse a request, this internal filtering can dilute creative intent. For LTX-2 video generation, using a standard encoder often results in:
@@ -380,11 +380,11 @@ NVFP4 quantization variants by [Sikaworld1990](https://huggingface.co/Sikaworld1
 
 <p id="split" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
-## Separated Components
+## ▓ Separated Components
 
 Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) and [Kijai](https://huggingface.co/Kijai/LTX2.3_comfy) for LTX-2.3. For alternative way to load the models in Comfy.
 
-### Diffusion Models (Transformer Only)
+### ▣ Diffusion Models (Transformer Only)
 
 | Ver | Name | Precision | Size | Download |
 | :--- | :--- | :---: | :---: | :---: |
@@ -409,7 +409,7 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 > [!NOTE]  
 > input_scaled additionally have activation scaling, and are set to run with fp8 matmuls on supported hardware (roughly 40xx and later Nvidia GPUs).
 
-### VAE (Video & Audio)
+### ▣ VAE (Video & Audio)
 
 | Ver | Component | Precision | Size | Download |
 | :--- | :--- | :---: | :---: | :--- |
@@ -420,7 +420,7 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 | **2** | `Audio VAE` | ![BF16](https://img.shields.io/badge/bf16-0077cc?style=flat-square) | 218 MB | [![](https://img.shields.io/badge/Kijai-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/Kijai/LTXV2_comfy/resolve/main/VAE/LTX2_audio_vae_bf16.safetensors?download=true) |
 
 
-### Embedding Connectors & Text Projection
+### ▣ Embedding Connectors & Text Projection
 
 | Ver | Name | Precision | Size | Download |
 | :--- | :--- | :---: | :---: | :--- |
@@ -432,9 +432,9 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 
 <p id="lora" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
-## LoRA
+## ▓ LoRA
 
-### Enchancer, special
+### ▣ Enchancer, special
 
 * [LTX-2.3-IC-LoRA-Colorizer](https://huggingface.co/DoctorDiffusion/LTX-2.3-IC-LoRA-Colorizer) by [DoctorDiffusion](https://huggingface.co/DoctorDiffusion) (331 MB) - Colorize black and white videos
 * [JUST-DUB-IT](https://huggingface.co/justdubit/justdubit)
@@ -474,7 +474,7 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [Detailer](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Detailer) - Enhances fine details and textures in generated videos
   * [Pose Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Pose-Control) - Human pose estimation control for motion guidance
 
-### Styles
+### ▣ Styles
 *   [LTX-2-19b-LoRA-SPROUT](https://huggingface.co/oumoumad/LTX-2-19b-LoRA-SPROUT)
 *   [Hydraulic press](https://huggingface.co/kabachuha/ltx2-hydraulic-press)
 *   [Cakeify](https://huggingface.co/kabachuha/ltx2-cakeify)
@@ -509,13 +509,13 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [`Camera Control: static`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Static/blob/main/ltx-2-19b-lora-camera-control-static.safetensors)
   * [`Union-Control`](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Union-Control/resolve/main/ltx-2-19b-ic-lora-union-control-ref0.5.safetensors)
 
-### Special
+### ▣ Special
 
 * [Wan2.1 VAE Adapter](https://huggingface.co/HDHCDev/Ltx2_2_Wan2.1_VAE_Adapter)
   * Latent space adapter for converting between LTX-2 and Wan2.1 VAE representations
   * `latent_adapter_final.pt` (447 MB)
 
-### ID-LoRA (Identity-Driven In-Context LoRA)
+### ▣ ID-LoRA (Identity-Driven In-Context LoRA)
 
 **ID-LoRA** is a method that enables identity-preserving audio-video generation in a single model. It jointly generates a subject's appearance and voice, letting a text prompt, a reference image, and a short audio clip govern both modalities together. Built on top of LTX-2.3 (22B), it is the **first method to personalize visual appearance and voice within a single generative pass**.
 
@@ -540,9 +540,9 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 
 <p id="wf" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
-##  Workflow & Technical Notes
+## ▓  Workflow & Technical Notes
 
-### Lightricks
+### ❖ Lightricks
 
 **[LTX-2.3](https://github.com/Lightricks/ComfyUI-LTXVideo/tree/master/example_workflows/2.3)**:
 * [ICLoRA Motion Track Control](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.3/ltx-2.3-iclora-motion-track-control.json)
@@ -559,7 +559,7 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 * [Video to Video](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.0/ltx-2-v2v.json)
 * [Video to Video Detailer](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.0/ltx-2-v2v-detailer.json)
 
-### ComfyUI
+### ❖ ComfyUI
 
 * [Text-to-video](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_t2v.json)
 * [Text-to-video Distilled (faster, 8 steps)](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_t2v_distilled.json)
@@ -569,7 +569,7 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 * [Canny control](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_canny_to_video.json)
 * [Pose control](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_pose_to_video.json)
 
-### RuneXX
+### ❖ RuneXX
 
 **[RuneXX](https://huggingface.co/RuneXX/LTX-2.3-Workflows) LTX-2.3 Workflows:**
 
@@ -585,12 +585,15 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 
 * [I2V T2V Talking Avatar (Qwen-TTS)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Talking-Avatar-TTS/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_Qwen-TTS).json)
 * [I2V T2V Talking Avatar (Fish-Audio-Pro)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Talking-Avatar-TTS/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_Fish-Audio-Pro).json)
+* [I2V T2V Talking Avatar (OmniVoice-TTS)](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Talking-Avatar-TTS/LTX-2.3_-_I2V_T2V_Talking_Avatar_(voice_clone_with_OmniVoice-TTS).json)
 
 **Video-2-Video:**
-* [V2V Just Talk Prompt Lipsynced Voice](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_prompt_lipsynced-voice_to_any_video.json) 
-* [V2V Dub It lip-synced dubbing multilanguage](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Dub_It_lip-synced_dubbing_multilanguage.json) 
-* [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video.json) 
-* [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json) 
+* [V2V Just Talk Prompt Lipsynced Voice](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_prompt_lipsynced-voice_to_any_video.json)
+* [V2V Just Talk Prompt Lipsynced Voice Sam3](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_prompt_lipsynced-voice_to_any_video_Sam3.json)
+* [V2V Dub It lip-synced dubbing multilanguage](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Dub_It_lip-synced_dubbing_multilanguage.json)
+* [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video.json)
+* [V2V Expand Any Video IC-Lora-Outpaint](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Expand_Any_Video_IC-Lora-Outpaint.json)
+* [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json)
 * [V2V ReTake recreate any section of any video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json) 
 
 **Custom-Audio:**
@@ -601,11 +604,12 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 
 **First-Last-Frame:**
 
-* [FML2V Guider Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_Guider_Custom_Audio.json)
-* [FL2V Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FL2V_Custom_Audio.json)
-* [FL2V First Last Frame Injection](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FL2V_First_Last_Frame_Injection.json)
+* [FLF2V First Last Frame](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FLF2V_First-Last-Frame.json)
+* [FLF2V First Last Frame Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FLF2V_First-Last-Frame_custom_audio.json)
+* [FLF2V First Last Frame Transition LoRA](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FLF2V_First-Last-Frame_transition_lora.json)
 * [FML2V First Middle Last Frame Guider](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_First_Middle_Last_Frame_Guider.json)
 * [FML2V First Middle Last Frame Injection](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_First_Middle_Last_Frame_Injection.json)
+* [FML2V Guider Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/First-Last-Frame/LTX-2.3_-_FML2V_Guider_Custom_Audio.json)
 
 **Long-Video-Experimental:**
 
@@ -617,6 +621,21 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 
 * [I2V T2V Experimental 3-pass 1.5x Upscaler](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/3-Pass-Experimental/LTX-2.3_-_I2V_T2V_Experimental_3-Pass.json)
 * [I2V T2V DEV Experimental 3-Pass](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/3-Pass-Experimental/LTX-2.3_-_I2V_T2V_DEV_Experimental_3-Pass.json)
+
+**Control-reference:**
+
+* [I2V TV2V Transfer Camera Movements IC-Cameraman LoRA](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Control-reference/LTX-2.3_-_IV2V_TV2V_transfer_camera_movements_IC-Cameraman_lora.json)
+* [I2V TV2V Transfer Control Pose IC-union-LoRA](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Control-reference/LTX-2.3_-_IV2V_TV2V_transfer_control_pose_IC-union-lora.json)
+
+**Music-Video-Creator:**
+
+* [I2V T2V Music-Video-Creator Multi-Scene Custom Audio](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Music-Video-Creator/LTX-2.3_-_I2V_T2V_Music-Video-Creator_multi-scene_custom_audio.json)
+
+**Helper-Workflows:**
+
+* [AceStep-XL Create Music From a Prompt](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Music-Video-Creator/Helper-Workflows/AceStep-XL_create_music_from_a_prompt.json)
+* [Flux-Klein Transform Firstframe](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Music-Video-Creator/Helper-Workflows/Flux-Klein_transform_firstframe.json)
+* [Qwen-Image Transform Firstframe Next Scene or Different Angle LoRA](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Music-Video-Creator/Helper-Workflows/Qwen-Image_transform_firstframe_next_scene_or_different_angle_lora.json)
 
 **Other-examples:**
 
