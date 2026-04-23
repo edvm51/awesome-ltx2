@@ -114,6 +114,14 @@ Required for current two-stage pipeline implementations in this repository. Down
 | | | | |
 | **2** | `temporal-upscaler x2 1.0` | 262 MB | [![](https://img.shields.io/badge/Lightricks-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/Lightricks/LTX-2/resolve/main/ltx-2-temporal-upscaler-x2-1.0.safetensors) |
 
+### ▣ Merges
+
+Custom merged models combining multiple control signals or specialized configurations.
+
+| Ver | Name | Description | Download |
+| :--- | :--- | :--- | :--- |
+| **2.3** | `ltx-2.3-22b-distilled-1.1-fused-union-control` | Merged model combining Canny, Depth, and Pose control signals for unified control | [![](https://img.shields.io/badge/linoyts-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/linoyts/ltx-2.3-22b-distilled-1.1-fused-union-control) |
+
 <p id="gguf" align="center">══════════════════════════════════</p>
 
 ### ▣ GGUF Quantized Models
@@ -493,6 +501,8 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [IC-LoRA-ReFocus](https://huggingface.co/oumoumad/LTX-2.3-22b-IC-LoRA-ReFocus) - Removes lens blur and restores focus to out-of-focus footage (lens blur only)
   * [IC-LoRA-Uncompress](https://huggingface.co/oumoumad/LTX-2.3-22b-IC-LoRA-Uncompress) - Removes MP4 compression artifacts (blocking, banding, mosquito noise) and restores clean video
   * [FXIC LTX2 IC-LoRA](https://huggingface.co/oumoumad/fxic-ltx2-iclora) - Flux-inspired IC-LoRA for LTX video transformation with multiple optimizer variants (adamw, prodigy, masked) at various training steps
+* Kijai
+  * [LTX2-IC-LoRAs](https://huggingface.co/Kijai/LTX2-IC-LoRAs) - IC-LoRA trained with the realisdance set
 * Cseti
   * [IC-LoRA-Cameraman v1](https://huggingface.co/Cseti/LTX2.3-22B_IC-LoRA-Cameraman_v1) - Transfers camera movements (zoom, pan, tilt, orbit) from reference video to generated output
   * [IC-LoRA-EditRefVid v1](https://huggingface.co/Cseti/LTX2.3-22B_IC-LoRA-EditRefVid_v1) - Edit reference video IC-LoRA for editing existing videos using reference guidance
@@ -524,6 +534,21 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 * [Eat](https://huggingface.co/kabachuha/ltx2-eat)
 * [POP! Inflatable Animation](https://huggingface.co/kabachuha/ltx23-pop) - Comically inflate and pop cartoon/anime characters into confetti and fabric scraps (I2V focused)
 * [CRT Animation Terminal](https://huggingface.co/lovis93/crt-animation-terminal-ltx-2.3-lora) by [lovis93](https://huggingface.co/lovis93) - Real late-80s/early-90s CRT monitor look with scanlines, phosphor glow, chromatic aberration, and dithering. Trigger word: `crtanim,`. Available in 4000 and 10000 training steps variants
+* vrgamedevgirl84 Style LoRAs
+  * [Wild West Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Wild_West_Style_LoRa)
+  * [Paper Cut Out Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Paper_Cut_Out_Style_LoRa)
+  * [Post Apocalyptic Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Post_Apocalyptic_Style_LoRa)
+  * [Pixar Toon Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Pixar_Toon_Style_LoRa)
+  * [Luxe Sensual Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Luxe_Sensual_Style_LoRa)
+  * [Soft Enhance Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Soft_Enhance_Style_LoRa)
+  * [Crisp Enhance Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Crisp_Enhance_Style_LoRa)
+  * [Fantasy Puppet Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Fantasy_Puppet_Style_LoRa)
+  * [Fantasy Realism Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Fantasy_Realism_Style_LoRa)
+  * [Fantasy Painterly Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Fantasy_Painterly_Style_LoRa)
+  * [Fantasy Anime Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Fantasy_Anime_Style_LoRa)
+  * [Cozy Felt Style](https://huggingface.co/vrgamedevgirl84/LTX2.3_Cozy_Felt_Style_LoRa)
+  * [Clay Mation Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Clay_Mation_Style_LoRa)
+  * [90s Animation Style](https://huggingface.co/vrgamedevgirl84/LTX_2.3_90s_Animation_Style_LoRa)
 * [Alissonerdx LTX-LoRAs Collection](https://huggingface.co/Alissonerdx/LTX-LoRAs) - Comprehensive collection including:
   * Anime2Half-Real - Converts anime-style content to half-realistic aesthetic (4500 steps, rank64)
   * Edit-Anything Global - Global editing LoRA variants (6000-9000 steps, rank128)
@@ -640,7 +665,10 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 * [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video.json)
 * [V2V Expand Any Video IC-Lora-Outpaint](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Expand_Any_Video_IC-Lora-Outpaint.json)
 * [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json)
-* [V2V ReTake recreate any section of any video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json) 
+* [V2V ReTake recreate any section of any video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json)
+
+**Movie-Maker:**
+* [Movie Maker Workflows](https://huggingface.co/RuneXX/LTX-2.3-Workflows/tree/main/Movie-Maker)
 
 **Custom-Audio:**
 
