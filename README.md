@@ -103,6 +103,23 @@ Quantized to fp8_e5m2 to support older Triton with older Pytorch on 30 series GP
 | **2** | `175` | ![bf16](https://img.shields.io/badge/bf16-0077cc?style=flat-square) | 3.58 GB | [![](https://img.shields.io/badge/Kijai-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/Kijai/LTXV2_comfy/resolve/main/loras/ltx-2-19b-distilled-lora_resized_dynamic_fro09_avg_rank_175_bf16.safetensors) |
 | **2** | `175` | ![fp8](https://img.shields.io/badge/fp8-28a745?style=flat-square) | 1.79 GB | [![](https://img.shields.io/badge/Kijai-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/Kijai/LTXV2_comfy/resolve/main/loras/ltx-2-19b-distilled-lora_resized_dynamic_fro09_avg_rank_175_fp8.safetensors) |
 
+#### ▣ TenStrip Distilled LoRA Experiments
+
+Experimental distilled LoRAs optimized for finetunes and I2V workflows. These LoRAs avoid the issues of the massive rank 384 official LoRA which can be counterproductive with conditioned inputs and finetunes.
+
+| LoRA | Rank | Size | Description |
+|:---|:---|:---:|:---|
+| `ltx-2.3-22b-distilled-lora-1.1_fro90_ceil36` | 36 | 739 MB | Compact LoRA with dynamic ceiling at 36 |
+| `ltx-2.3-22b-distilled-lora-1.1_fro90_ceil72_condsafe` | 72 | 662 MB | Cond-safe version with cross-attention bridges, adaln/scale-shift tables, gate logits, and prompt scale-shift zeroed. Much better suited for I2V and input conditioned workflows. Can use 1.0 strength safely on first pass I2V. |
+| `ltx-2.3-22b-distilled-lora-fro90_ceil72` | 72 | 1.4 GB | Standard version with higher dynamic ceiling |
+
+**Notes:**
+- Lower rank LoRAs (72 and below) can be used at 1.0 strength safely for I2V first pass, with upscale pass at 0.4-0.5 strength
+- `_ceil` suffix indicates the dynamic ceiling during reranking
+- `_condsafe` suffix indicates cross-attention and other conditioning layers have been zeroed for better I2V compatibility
+- The official rank 384 LoRA can actively dampen conditioning signals in I2V workflows; cond_safe versions work much better
+
+[Download All LoRAs](https://huggingface.co/TenStrip/LTX2.3_Distilled_Lora_1.1_Experiments)
 
 #### **Spatial Upscaler**
 Required for current two-stage pipeline implementations in this repository. Download to `COMFYUI_ROOT_FOLDER/models/latent_upscale_models` folder.
@@ -130,6 +147,19 @@ Custom merged models combining multiple control signals or specialized configura
 | Ver | Name | Description | Download |
 | :--- | :--- | :--- | :--- |
 | **2.3** | `ltx-2.3-22b-distilled-1.1-fused-union-control` | Merged model combining Canny, Depth, and Pose control signals for unified control | [![](https://img.shields.io/badge/linoyts-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/linoyts/ltx-2.3-22b-distilled-1.1-fused-union-control) |
+
+<p id="finetunes" align="center">══════════════════════════════════</p>
+
+### ▣ Finetunes
+
+Community finetuned models based on LTX-2.3 with specialized improvements and optimizations.
+
+| Model | Description |
+| :--- | :--- |
+| [![](https://img.shields.io/badge/DaSiWa-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/darksidewalker/DaSiWa-LTX2.3) | High-performance LoRA-integrated checkpoint family based on LTX 2.3. Includes both distilled (4-step) and non-distilled variants (20-30 steps). Recommended sampler: Euler + Simple/Normal/Linear_Quadratic. |
+| [![](https://img.shields.io/badge/10Eros-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/TenStrip/LTX2.3-10Eros) | I2V-optimized merge using layer scaled merges at different steps. Not a straight weight merge - behaves much nicer than standard LoRA loading and respects prompts better. Includes BF16 full checkpoint and fp8_mixed_learned quantized versions. |
+| [![](https://img.shields.io/badge/Sulphur_2_base-lightgrey?style=flat-square&logo=huggingface&logoColor=white)](https://huggingface.co/SulphurAI/Sulphur-2-base) | Uncensored video generation model based on LTX 2.3 supporting T2V and I2V natively. Includes a built-in prompt enhancer. Merge base for 10Eros. Supports GGUF format. |
+
 
 <p id="gguf" align="center">══════════════════════════════════</p>
 
@@ -497,6 +527,7 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * Original by MachineDelusions
   * [siraxe variant](https://huggingface.co/siraxe/MachineDelusions_LTX-2_Image2Video_Adapter_LoRa) - Stripped audio layers + rank64 compressed (2.62 GB, 655 MB rank64 bf16)
 * Lightricks LTX-2.3
+  * [HDR](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-HDR) - Enables 16-bit HDR video generation and converts SDR video to HDR using LogC3 transform for extended dynamic range
   * [Union Control](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-Union-Control) - Unified IC-LoRA combining Canny + Depth + Pose control signals for multi-signal video generation conditioning
   * [Motion Track Control](https://huggingface.co/Lightricks/LTX-2.3-22b-IC-LoRA-Motion-Track-Control) - Guides object motion using sparse point trajectories via colored spline overlays on reference videos
 * vrgamedevgirl84
@@ -587,8 +618,9 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [Object POV](https://huggingface.co/Nebsh/POVObject)
 * [Squish](https://huggingface.co/ovi054/LTX-2-19b-Squish-LoRA)
 * [Yoshiaki Kawajiri Retro Anime](https://huggingface.co/tarn59/Yoshiaki_Kawajiri_Retro_Anime_LTX2) - LoRA trained on Yoshiaki Kawajiri's distinctive retro anime art style
-* [DonaldTrump](https://huggingface.co/Playtime-AI/LTX-2.DonaldTrump)
 * Playtime-AI
+  * [DonaldTrump](https://huggingface.co/Playtime-AI/LTX-2.DonaldTrump)
+  * [Rick_and_Morty](https://huggingface.co/Playtime-AI/LTX-2.3-Rick_and_Morty-BETA) - BETA LoRA for Rick and Morty animated style
   * [LTX-2.3-Wednesday_Addams](https://huggingface.co/Playtime-AI/LTX-2.3-Wednesday_Addams)
   * [LTX-2.3-Kermit_the_Frog](https://huggingface.co/Playtime-AI/LTX-2.3-Kermit_the_Frog)
   * [LTX-2.3-Jenna_Coleman](https://huggingface.co/Playtime-AI/LTX-2.3-Jenna_Coleman)
@@ -637,7 +669,6 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 
 **Resources:**
 - [Project Page](https://id-lora.github.io/) | [GitHub](https://github.com/ID-LoRA/ID-LoRA) | [Paper (arXiv: 2603.10256)](https://arxiv.org/abs/2603.10256)
-
 
 <p id="wf" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
