@@ -571,6 +571,7 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
 ### ▣ Styles
 * Cseti
   * [Arcane-Jinx v1](https://huggingface.co/Cseti/LTX2.3-22B_Arcane-Jinx_v1) - Style LoRA inspired by Arcane's Jinx character design
+  * [ReStyle IC-LoRA](https://huggingface.co/Cseti/LTX2.3-22B_ReStyle_IC-LoRA) - Image-guided style transfer IC-LoRA that re-renders videos in a target style while preserving original content and motion
 * lopho
   * [Gantz O v1.0.0](https://huggingface.co/lopho/ltx2-movie-loras) - Movie-style LoRA (654 MB, 10000 steps)
 * bionicman69
@@ -670,6 +671,64 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 **Resources:**
 - [Project Page](https://id-lora.github.io/) | [GitHub](https://github.com/ID-LoRA/ID-LoRA) | [Paper (arXiv: 2603.10256)](https://arxiv.org/abs/2603.10256)
 
+<p id="nodes" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
+
+## ▓ ComfyUI Nodes
+
+### ▣ Custom Node Collections
+
+* [10S-Comfy-nodes](https://github.com/TenStrip/10S-Comfy-nodes) by TenStrip - Custom ComfyUI nodes for improving motion quality when working with LTX 2.3's combined audio/video latent pipeline. Includes Latent Cross Fade Auto Concat, Audio Latent Stretch, Latent Motion Sharpener, Latent Temporal Upsampler, Latent Motion Retime, and Latent Temporal Inpainter for clean 30fps output from 24fps sampled models.
+
+* [Deno Custom Nodes](https://github.com/Deno2026/comfyui-deno-custom-nodes) by Deno2026 - Practical ComfyUI custom nodes focused on fast real-world workflow improvements including (Deno) Resize Box, Multi Image Loader, LTX Sequencer, LTX Model Loader, Easy Model Download Helper, LTX Multi LoRA Loader, and LTX Prompt Guide.
+
+* [PromptRelay](https://github.com/kijai/ComfyUI-PromptRelay) by kijai - Enables consistent multilingual lip-sync while maintaining voice consistency across languages. Distributes video latent frames across segments with smart prompt node supporting inline and block syntax styles.
+
+* [WhatDreamsCost ComfyUI](https://github.com/WhatDreamsCost/WhatDreamsCost-ComfyUI) by WhatDreamsCost - A variety of custom ComfyUI nodes and workflows for creating AI-generated video content including Multi Image Loader, LTX Sequencer, LTX Keyframer, Speech Length Calculator, Load Video UI, and Load Audio UI.
+
+* [ComfyUI-Sapiens2](https://github.com/kijai/ComfyUI-Sapiens2) by kijai - ComfyUI nodes for Sapiens2 computer vision models from Facebook Research. Supports pose estimation, body-part segmentation, surface normal estimation, and pointmap estimation with model variants from 400M to 5B parameters.
+
+
+<p id="training" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
+
+## ▓ LoRA Training
+
+For training **LTX LoRAs**, the community uses a variety of official scripts, community-developed forks, and cloud-based platforms.
+
+### Primary Local Training Tools
+
+* **Official LTX-2 Trainer:** This is the standard Python-based package for training LoRAs, full fine-tuning, and In-Context (IC) LoRAs. It is designed for Linux and requires CUDA and Triton.
+    * **Link:** [Official LTX-2 Trainer Repository](https://github.com/Lightricks/LTX-2/tree/main/packages/ltx-trainer)
+* **Musubi-Tuner (AkaneTendo25 Fork):** Widely considered the **fastest and most efficient** local trainer for LTX-2 and 2.3. It features significantly smaller cache sizes (up to 12x smaller than AI Toolkit) and better iteration speeds, reaching up to **2 iterations per second on an RTX 5090**.
+    * **Link:** [AkaneTendo25 Musubi-Tuner Fork](https://github.com/AkaneTendo25/musubi-tuner)
+* **AI Toolkit (by Ostris):** A popular third-party tool that supports LTX-2 character and image-to-video LoRAs. While beginner-friendly, some users reported issues with audio training on the main branch.
+    * **Link:** [Official AI Toolkit Repository](https://github.com/ostris/ai-toolkit)
+* **AI Toolkit: BIG-DADDY-VERSION (ArtDesignAwesome Fork):** This specific fork was created to **fix broken audio and voice training** in the original AI Toolkit. It is optimized for hardware like the RTX 5090.
+    * **Link:** [ArtDesignAwesome AI Toolkit Fork](https://github.com/ArtDesignAwesome/ai-toolkit_BIG-DADDY-VERSION)
+* **rs-nodes (richservo):** A collection of nodes that includes a **full LTX Lora trainer directly within ComfyUI**. It is designed to be memory-efficient, allowing training on cards with as little as **11GB-12GB of VRAM** by using ComfyUI's native weight loaders.
+    * **Link:** [rs-nodes ComfyUI Trainer](https://github.com/richservo/rs-nodes)
+* **SimpleTuner:** A highly optimized trainer for Linux that supports LTX-2 and is noted for its ability to handle larger datasets on limited VRAM via block swapping.
+    * **Link:** [SimpleTuner Repository](https://github.com/bghira/SimpleTuner)
+
+### Cloud Training Platforms
+
+* **Fal.ai:** Provides a dedicated cloud trainer for custom styles and effects, though it is primarily limited to image-based training datasets.
+    * **Link:** [Fal.ai LTX2 Video Trainer](https://fal.ai/models/fal-ai/ltx2-video-trainer)
+* **RunComfy:** A cloud service that offers a pre-configured AI Toolkit setup specifically for LTX-2 training.
+    * **Link:** [RunComfy LTX-2 Training](https://www.runcomfy.com/trainer/ai-toolkit/ltx-2-lora-training)
+
+### Essential Dataset & Captioning Tools
+
+* **Taz's Ultimate Captioning Tool:** A Hugging Face space frequently used by the community to generate the **long, detailed, cinematographic prompts** (around 200 words) that LTX-2 requires for high-quality training.
+    * **Link:** [LoRA Caption Assistant (Hugging Face)](https://huggingface.co/spaces/comfyuiman/loracaptionertaz_v2)
+* **AI Video Clipper & LoRA Captioner:** A modular pipeline designed to automate local dataset creation using WhisperX and Qwen2-VL, including support for RTX 5090 Blackwell cards.
+    * **Link:** [AI Video Clipper & LoRA Captioner](https://github.com/cyberbol/AI-Video-Clipper-LoRA)
+
+### Training Requirements Summary
+
+* **Dataset:** Videos should typically be cut to **121 frames** (exactly 4.84 seconds) to align with the model's architectural "8n+1" rule.
+* **Hardware:** While 16GB VRAM is possible with extreme offloading in tools like **rs-nodes**, **24GB is the practical minimum** for quantized training. For best results and speed, **48GB to 80GB (H100 or RTX 6000)** is preferred.
+* **Precision:** It is now officially recommended to train on the **full BF16 model** for LTX 2.3 rather than FP8 for superior quality.
+
 <p id="wf" align="center">◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆◇◆</p>
 
 ## ▓  Workflow & Technical Notes
@@ -729,11 +788,16 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 **Video-2-Video:**
 * [V2V Just Talk Prompt Lipsynced Voice](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_prompt_lipsynced-voice_to_any_video.json)
 * [V2V Just Talk Prompt Lipsynced Voice Sam3](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_prompt_lipsynced-voice_to_any_video_Sam3.json)
+* [V2V Just Talk Custom Audio Lip-synced To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Just_Talk_custom_audio_lip-synced_to_any_video.json)
 * [V2V Dub It lip-synced dubbing multilanguage](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Dub_It_lip-synced_dubbing_multilanguage.json)
 * [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video.json)
+* [V2V Extend Any Video Multi-Extend Long Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video_Multi-Extend_long_video.json)
 * [V2V Expand Any Video IC-Lora-Outpaint](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Expand_Any_Video_IC-Lora-Outpaint.json)
 * [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json)
 * [V2V ReTake recreate any section of any video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json)
+* [V2V Video-Edit remove add replace restyle EditAnything-Lora](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Video-Edit_remove_add_replace_restyle_EditAnything-Lora.json)
+* [V2V High Dynamic Range IC-HDR-lora](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_high_dynamic_range_IC-HDR-lora.json)
+
 **Others:**
 * [I2V T2V Basic custom audio with Gemma-API example](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Others/LTX-2.3_-_I2V_T2V_Basic_custom_audio_with_Gemma-API_example.json)
 
@@ -768,6 +832,7 @@ Unlike cascaded pipelines that treat audio and video separately, ID-LoRA operate
 * [I2V TV2V Transfer Camera Movements IC-Cameraman LoRA](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Control-reference/LTX-2.3_-_IV2V_TV2V_transfer_camera_movements_IC-Cameraman_lora.json)
 * [I2V TV2V Transfer Body Movements IC-Union-Control-lora DWPose](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Control-reference/LTX-2.3_-_IV2V_TV2V_transfer_body_movements_IC-Union-Control-lora_DWPose.json)
 * [I2V TV2V Transfer Body Movements IC-Union-Control-lora SDPose](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Control-reference/LTX-2.3_-_IV2V_TV2V_transfer_body_movements_IC-Union-Control-lora_SDPose.json)
+* [I2V TV2V Transfer Body Movements IC-RealisDance-lora](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Control-reference/LTX-2.3_-_IV2V_TV2V_transfer_body_movements_IC-RealisDance-lora.json)
 
 **Music-Video-Creator:**
 
