@@ -543,6 +543,7 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [IC-LoRA-MotionDeblur](https://huggingface.co/oumoumad/LTX-2.3-22b-IC-LoRA-MotionDeblur) - Removes motion blur from footage
   * [IC-LoRA-Deinterlace](https://huggingface.co/oumoumad/LTX-2.3-22b-IC-LoRA-Deinterlace) - Removes interlacing artifacts from video
   * [FXIC LTX2 IC-LoRA](https://huggingface.co/oumoumad/fxic-ltx2-iclora) - Flux-inspired IC-LoRA for LTX video transformation with multiple optimizer variants (adamw, prodigy, masked) at various training steps
+  * [DeArchive LTX-2.3](https://huggingface.co/oumoumad/ltx-2.3-dearchive-lora) - In-Context LoRA for restoring archive video (old B&W footage, low-res web rips, sepia-toned silent-era prints) into colored, high-definition modern cinematography (Rank 128, 5,000 steps)
 * Kijai
   * [LTX2-IC-LoRAs](https://huggingface.co/Kijai/LTX2-IC-LoRAs) - IC-LoRA trained with the realisdance set
 * Cseti
@@ -567,6 +568,19 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [Depth Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Depth-Control) - Depth map conditioning for 3D spatial control
   * [Detailer](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Detailer) - Enhances fine details and textures in generated videos
   * [Pose Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Pose-Control) - Human pose estimation control for motion guidance
+
+**Upscaler LoRAs:**
+* [LTX 2.3 Upscale IC-LoRA](https://huggingface.co/Zlikwid/LTX_2.3_Upscale_IC_Lora) by [Zlikwid](https://huggingface.co/Zlikwid)
+  * Generative refinement LoRA for upscaling lower-res or soft videos
+  * Works by bicubic upscaling first, then running through LTX 2.3 with this LoRA
+  * Use prompt: `upscale`
+* [LTX2.3-ICEdit-Insight](https://huggingface.co/joyfox/LTX2.3-ICEdit-Insight) by [JoyFox Lab](https://huggingface.co/joyfox)
+  * Task-aware video restoration and editing model family
+  * Supports: Video Restoration, HD Enhancement, Watermark Removal, Subtitle Removal
+* [Singularity LTX-2.3 OmniCine](https://huggingface.co/WarmBloodAban/Singularity_LTX-2.3_OmniCine_Preview0.1) by [WarmBloodAban](https://huggingface.co/WarmBloodAban)
+  * Comprehensive optimizer for LTX2.3 I2V and First/Last Frame workflows
+  * Features: Limb Evolution, Shot Injection, Natural Expression, Physical Integrity, Cross-Style Potential
+  * Uses "Singularity" prompting framework with 7-block bilingual structure
 
 ### ▣ Styles
 * Cseti
@@ -634,14 +648,14 @@ Separated LTX2 checkpoint by [Kijai](https://huggingface.co/Kijai/LTXV2_comfy) a
   * [WHATUSEE](https://huggingface.co/TheBurgstall/WHATUSEE_LTX-2-19B_LoRA)
 * [Black Venom](https://huggingface.co/siraxe/black_venom_ltx2)
 * Lightricks
-  * [`Camera Control: dolly-in`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-In/blob/main/ltx-2-19b-lora-camera-control-dolly-in.safetensors)
-  * [`Camera Control: dolly-left`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-Left/blob/main/ltx-2-19b-lora-camera-control-dolly-left.safetensors)
-  * [`Camera Control: dolly-out`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-Out/blob/main/ltx-2-19b-lora-camera-control-dolly-out.safetensors)
-  * [`Camera Control: dolly-right`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-Right/blob/main/ltx-2-19b-lora-camera-control-dolly-right.safetensors)
-  * [`Camera Control: jib-down`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Jib-Down/blob/main/ltx-2-19b-lora-camera-control-jib-down.safetensors)
-  * [`Camera Control: jib-up`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Jib-Up/blob/main/ltx-2-19b-lora-camera-control-jib-up.safetensors)
-  * [`Camera Control: static`](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Static/blob/main/ltx-2-19b-lora-camera-control-static.safetensors)
-  * [`Union-Control`](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Union-Control/resolve/main/ltx-2-19b-ic-lora-union-control-ref0.5.safetensors)
+  * [Camera Control: dolly-in](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-In/blob/main/ltx-2-19b-lora-camera-control-dolly-in.safetensors)
+  * [Camera Control: dolly-left](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-Left/blob/main/ltx-2-19b-lora-camera-control-dolly-left.safetensors)
+  * [Camera Control: dolly-out](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-Out/blob/main/ltx-2-19b-lora-camera-control-dolly-out.safetensors)
+  * [Camera Control: dolly-right](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Dolly-Right/blob/main/ltx-2-19b-lora-camera-control-dolly-right.safetensors)
+  * [Camera Control: jib-down](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Jib-Down/blob/main/ltx-2-19b-lora-camera-control-jib-down.safetensors)
+  * [Camera Control: jib-up](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Jib-Up/blob/main/ltx-2-19b-lora-camera-control-jib-up.safetensors)
+  * [Camera Control: static](https://huggingface.co/Lightricks/LTX-2-19b-LoRA-Camera-Control-Static/blob/main/ltx-2-19b-lora-camera-control-static.safetensors)
+  * [Union-Control](https://huggingface.co/Lightricks/LTX-2-19b-IC-LoRA-Union-Control/resolve/main/ltx-2-19b-ic-lora-union-control-ref0.5.safetensors)
 
 ### ▣ Special
 
@@ -750,6 +764,16 @@ For training **LTX LoRAs**, the community uses a variety of official scripts, co
 * [Video to Video](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.0/ltx-2-v2v.json)
 * [Video to Video Detailer](https://raw.githubusercontent.com/Lightricks/ComfyUI-LTXVideo/refs/heads/master/example_workflows/2.0/ltx-2-v2v-detailer.json)
 
+### ❖ vrgamedevgirl84
+
+**[vrgamedevgirl84](https://huggingface.co/vrgamedevgirl84) LTX 2.3 Music Video Creator:**
+
+* [Music Video Creator Workflow](https://huggingface.co/vrgamedevgirl84/LTX_2.3_Music_Video_Creator_ComfyUI)
+  * Prompt Creator Workflow - Audio upload, beat detection, scene timing, lyrics analysis, style selection, prompt generation
+  * Text-to-Video Workflow - LoRA integration, advanced prompt controls, Remake Mode, video stitching
+  * Image-to-Video Workflow - Uses Z-Image Turbo and LTX 2.3
+  * Requirements: ComfyUI, LTX 2.3 models, Z-Image Turbo model, FFmpeg, vrgamedevgirl custom nodes
+  
 ### ❖ ComfyUI
 
 * [Text-to-video](https://raw.githubusercontent.com/Comfy-Org/workflow_templates/refs/heads/main/templates/video_ltx2_t2v.json)
@@ -792,6 +816,8 @@ For training **LTX LoRAs**, the community uses a variety of official scripts, co
 * [V2V Dub It lip-synced dubbing multilanguage](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Dub_It_lip-synced_dubbing_multilanguage.json)
 * [V2V Extend Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video.json)
 * [V2V Extend Any Video Multi-Extend Long Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video_Multi-Extend_long_video.json)
+* [V2V Extend Any Video towards Last-Frame-image](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Extend_Any_Video_towards_Last-Frame-image.json)
+* [V2V Remove Watermark Subtitles ICEdit-Insight-lora](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_remove_watermark_subtitles_ICEdit-Insight-lora.json)
 * [V2V Expand Any Video IC-Lora-Outpaint](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Expand_Any_Video_IC-Lora-Outpaint.json)
 * [V2V Foley Add Sound To Any Video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_Foley_Add_Sound_To_Any_Video.json)
 * [V2V ReTake recreate any section of any video](https://huggingface.co/RuneXX/LTX-2.3-Workflows/resolve/main/Video-2-Video/LTX-2.3_-_V2V_ReTake_recreate_any_section_of_any_video.json)
